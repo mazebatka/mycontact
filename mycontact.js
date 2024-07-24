@@ -11,11 +11,21 @@ number_input.addEventListener("input", function (event) {
   number = event.target.value;
 });
 
-const myContacts = [];
+function clearForm() {
+  document.getElementById("name").value = "";
+  document.getElementById("number").value = "";
+  fullname = "";
+  number = "";
+}
+function addContact() {
+  myContacts.push({ fullname, number });
+}
 
+const myContacts = [];
 function addToContact() {
-  if (myContacts.length === 0) {
-    addContact(fullname, number);
+  if (fullname === "" || number === "") {
+    alert("Both name and number are required.");
+    return;
   } else {
     for (let i = 0; i < myContacts.length; i++) {
       if (
@@ -23,26 +33,28 @@ function addToContact() {
         myContacts[i].number === number
       ) {
         alert("this person already exist");
-        break;
-      } else {
-        addContact(fullname, number);
         clearForm();
-        break;
+        return;
       }
     }
+    console.log(myContacts);
+    addContact();
+    displayContact();
+    clearForm();
+    return;
   }
-
-  clearForm();
 }
 
-function addContact() {
-  myContacts.push({ fullname, number });
+function displayContact() {
+  const contactList = document.getElementById("mycontact-list");
+  contactList.innerHTML = "";
+  for (let i = 0; i < myContacts.length; i++) {
+    const new_contact = document.createElement("li");
+    new_contact.textContent = `${myContacts[i].fullname}: ${myContacts[i].number}`;
+    contactList.appendChild(new_contact);
+  }
 }
-
-function clearForm() {
-  document.getElementById("name").value = "";
-  document.getElementById("number").value = "";
-}
+const myContactList = document.getElementById("mycontact-list");
 
 const add_to_contact = document.getElementById("add-to-contact");
 add_to_contact.addEventListener("click", addToContact);
