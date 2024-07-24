@@ -12,19 +12,37 @@ number_input.addEventListener("input", function (event) {
 });
 
 const myContacts = [];
+
 function addToContact() {
-  for (let i = 0; i < myContacts.length; i++) {
-    if (
-      myContacts[i].fullname === fullname ||
-      myContacts[i].number === number
-    ) {
-      alert("this person already exist");
-    } else {
-      myContacts.push({ fullname, number });
-      document.getElementById("name").value = "";
-      document.getElementById("number").value = "";
+  if (myContacts.length === 0) {
+    addContact(fullname, number);
+  } else {
+    for (let i = 0; i < myContacts.length; i++) {
+      if (
+        myContacts[i].fullname === fullname ||
+        myContacts[i].number === number
+      ) {
+        alert("this person already exist");
+        break;
+      } else {
+        addContact(fullname, number);
+        clearForm();
+        break;
+      }
     }
   }
+
+  clearForm();
 }
+
+function addContact() {
+  myContacts.push({ fullname, number });
+}
+
+function clearForm() {
+  document.getElementById("name").value = "";
+  document.getElementById("number").value = "";
+}
+
 const add_to_contact = document.getElementById("add-to-contact");
 add_to_contact.addEventListener("click", addToContact);
