@@ -50,7 +50,7 @@ function displayContact() {
   contactList.innerHTML = "";
   for (let i = 0; i < myContacts.length; i++) {
     const new_contact = document.createElement("li");
-    new_contact.textContent = `${myContacts[i].fullname}: ${myContacts[i].number}`;
+    new_contact.textContent = `${myContacts[i].fullname} ${myContacts[i].number}`;
     contactList.appendChild(new_contact);
   }
 }
