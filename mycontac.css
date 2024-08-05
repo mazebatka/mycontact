@@ -26,3 +26,7 @@
     background-color:bisque;
     border-radius: 25px;
 }
+body{
+    display: flex;
+    justify-content: center;
+}
